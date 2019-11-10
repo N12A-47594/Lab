@@ -1,0 +1,90 @@
+#include <stdio.h>
+
+
+int main()
+
+{
+    printf("Wybierz dzialanie:\n");
+    printf("Dodawanie = +\n");
+    printf("Odejmowanie = -\n");
+    printf("Mnozenie = *\n");
+    printf("Dzielenie = :\n");
+    printf("Inny znak bedzie traktowany jako zakonczenie pracy programu.\n");
+
+    float a,b,c;
+    char x;
+
+    scanf("%c", &x);
+    switch (x)
+    {
+    case '+':
+
+        printf("Podaj pierwsza liczbe:\n");
+        scanf("%f", &a);
+
+        printf("Podaj kolejna liczbe:\n");
+        scanf("%f", &b);
+
+        c=a+b;
+
+        printf("wynik:%f\n", c);
+
+        break;
+
+    case '-':
+
+        printf("Podaj pierwsza liczbe:\n");
+        scanf("%f", &a);
+
+        printf("Podaj kolejna liczbe:\n");
+        scanf("%f", &b);
+
+        c=a-b;
+
+        printf("wynik:%f\n", c);
+
+        break;
+
+    case '*':
+
+        printf("Podaj pierwsza liczbe:\n");
+        scanf("%f", &a);
+
+        printf("Podaj kolejna liczbe:\n");
+        scanf("%f", &b);
+
+        c=a*b;
+
+        printf("wynik:%f\n", c);
+
+        break;
+
+    case ':':
+
+        printf("Podaj pierwsza liczbe:\n");
+        scanf("%f", &a);
+
+        printf("Podaj kolejna liczbe:\n");
+        scanf("%f", &b);
+
+            if(b==0)
+            printf("Nie dziel przez zero.\n");
+
+            else
+            {
+            c=a/b;
+            printf("wynik:%f\n", c);
+            }
+
+        break;
+
+
+
+    default:
+
+        printf("Okej-_-");
+
+        break;
+    }
+    return 0;
+}
