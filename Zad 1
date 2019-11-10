@@ -1,0 +1,77 @@
+void main()
+{
+	double a,b,c,Min,Max,S;
+	
+	// Pobieranie zmiennych
+	
+    printf("Podaj pierwsza zmienna:\n");
+    scanf("%d",&a);
+    printf("Podaj druga zmienna:\n");
+    scanf("%d",&b);
+    printf("Podaj trzecia zmienna:\n");
+    scanf("%d",&c);
+    printf("\n");
+    printf("Sortowanie: ");
+
+	// Sortowanie Babelkowe + Min & Max
+
+
+    if (a>b)
+	{
+        if (b>c)
+        {
+        	printf("%d,%d,%d\n", a,b,c);
+        	Max = a;
+        	Min = c;
+        }
+		else
+		{
+			if (a>c)
+			{
+            	printf("%d,%d,%d\n", a,c,b );
+            	Max = a;
+            	Min = b;
+        	}
+            else
+            {
+            	printf("%d,%d,%d\n", c,a,b );
+            	Max = c;
+            	Min = b;
+        	}
+    	}
+	}
+    else
+    {
+		if (b>c)
+		{	
+            if (a>c)
+            {
+            	printf("%d,%d,%d\n", b,a,c);
+            	Max = b;
+            	Min = c;
+			}
+            else
+            {
+            	printf("%d,%d,%d\n", b,c,a);
+            	Max = b;
+            	Min = a;
+			}
+        }
+		else
+		{
+            printf("%d,%d,%d\n", c,b,a);
+            Max = c;
+            Min = a;
+		}
+    }
+    
+    S = a+b+c;
+    
+    printf("\n");
+    printf("Suma: %d\n", S);
+    printf("\n");
+    printf("Najmniejsza: %d\n", Min);
+    printf("\n");
+    printf("Najwieksza: %d\n", Max);
+    
+}
