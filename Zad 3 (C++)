@@ -1,0 +1,58 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+	int T[20];
+	int Suma, Srednia;
+	
+	cout<<"Tablica:"<<endl;	//Generacja losowych zmiennych do tablicy.
+	srand(time(NULL));
+	for(int i=0; i<20; i++)
+	{
+		T[i] = rand()%100;
+		cout<<T[i]<<", ";
+	}
+	cout<<endl;
+	
+	cout<<"Posegregowana Tablica:"<<endl; // Sortowanie tablicy.
+	
+	for (int j=1; j<20; j++)
+	{
+		for (int i=19; i>=1; i--)
+		{
+			if (T[i]<T[i--])
+			{
+				int reka;
+				reka = T[i--];
+				T[i--] = T[i];
+				T[i] = reka;
+			}
+		}
+	}
+	
+	for(int i=0; i<20; i++)
+	{
+		cout<<T[i]<<", ";
+	}
+	cout<<endl;
+	
+	cout<<"Najmniejsza: "<<T[0]<<endl;
+	cout<<"Najwieksza: "<<T[19]<<endl;
+	
+	for (int i=0;i<20;i++)
+	{
+		Suma += T[i];
+	}
+
+	cout<<"Suma: "<<Suma<<endl;
+	
+	Srednia = Suma/20;
+	
+	cout<<"Srednia: "<<Srednia<<endl;
+	
+	return 0;
+}
