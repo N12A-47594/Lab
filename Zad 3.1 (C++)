@@ -1,0 +1,86 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+
+using namespace std;
+
+int *T;
+int n;
+int Suma, Srednia;
+
+ int generateArray(int n)		//Matka
+ {
+	srand(time(NULL));
+	for(int i=0; i<n; i++)
+	{
+		T[i] = rand()%100;
+	}
+	cout<<endl;
+ }
+
+int sortArray(int n)			//Pierworodna
+{
+	for (int j=1; j<n; j++)
+	{
+		for (int i=n; i>=1; i--)
+		{
+			if (T[i]<T[i--])
+			{
+				int reka;
+				reka = T[i--];
+				T[i--] = T[i];
+				T[i] = reka;
+			}
+		}
+	}
+}
+
+int averageValue(int n) 	//Malcolm
+{
+	for (int i=0;i<n;i++)
+	{
+		Suma += T[i];
+	}
+	
+	Srednia = Suma/n;
+	cout<<"Srednia: "<<Srednia<<endl;
+}
+
+int maximumValue()					//Starsza Bliźniaczka
+{
+	cout<<"Najwieksza: "<<T[n]<<endl;
+}
+
+int minimumValue() 					//Młodsza Bliźniaczka
+{
+	cout<<"Najmniejsza: "<<T[0]<<endl;
+}
+
+int printArray() 					//Bobo
+{
+	cout<<"Tablica:"<<endl;
+	for(int i=0; i<n; i++)
+	{
+		cout<<T[i]<<", ";
+	}
+	cout<<endl;	
+}	
+
+int main()
+{
+	
+	
+	cout<<"Podaj rozmiar Tablicy"<<endl;
+	cin>>n;
+	T = new int [n];
+	
+	generateArray(n);
+	sortArray(n);
+	averageValue(n);
+	minimumValue();
+	maximumValue();
+	printArray();
+	
+	delete [] T;
+	return 0;
+}
