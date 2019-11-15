@@ -1,0 +1,112 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+
+using namespace std;
+
+int *T;
+int m;
+int n;
+int Suma, Srednia;
+
+int menu(int m);				//Ojciec
+{
+	switch(m)
+	{
+		cout<<"Co chcialbys zrobic z tablica?"<<endl;
+		cout<<"1. Wypelnic losowymi zmiennymi."<<endl;
+		cout<<"2. Posortowac."<<endl;
+		cout<<"3. Policzyc srednia wartosc zmiennych."<<endl;
+		cout<<"4. Podejrzec najnizsza wartosc."<<endl;
+		cout<<"5. Podejrzec najwyzsza wartosc."<<endl;
+		cout<<"6. Obejrzec Tablice."<<endl:
+		case 1:
+			generateArray(n);
+		case 2:
+			sortArray(n);
+		case 3:
+			averageValue(n);
+		case 4:
+			minimumValue();
+		case 5:
+			maximumValue();
+		case 6:
+			printArray();
+		default:
+			cout<<"Nie kombinuj."<<endl;
+	}
+}
+
+int generateArray(int n)		//Matka
+ {
+	srand(time(NULL));
+	for(int i=0; i<n; i++)
+	{
+		T[i] = rand()%100;
+	}
+	cout<<endl;
+ }
+
+int sortArray(int n)			//Pierworodna
+{
+	for (int j=1; j<n; j++)
+	{
+		for (int i=n; i>=1; i--)
+		{
+			if (T[i]<T[i--])
+			{
+				int reka;
+				reka = T[i--];
+				T[i--] = T[i];
+				T[i] = reka;
+			}
+		}
+	}
+}
+
+int averageValue(int n) 	//Malcolm
+{
+	for (int i=0;i<n;i++)
+	{
+		Suma += T[i];
+	}
+	
+	Srednia = Suma/n;
+	cout<<"Srednia: "<<Srednia<<endl;
+}
+
+int maximumValue()					//Starsza Bliźniaczka
+{
+	cout<<"Najwieksza: "<<T[n]<<endl;
+}
+
+int minimumValue() 					//Młodsza Bliźniaczka
+{
+	cout<<"Najmniejsza: "<<T[0]<<endl;
+}
+
+int printArray() 					//Bobo
+{
+	cout<<"Tablica:"<<endl;
+	for(int i=0; i<n; i++)
+	{
+		cout<<T[i]<<", ";
+	}
+	cout<<endl;	
+}	
+
+int main()
+{
+	
+	cout<<"Stworzmy Tablice!"<<endl;
+	cout<<"Podaj rozmiar Tablicy:"<<endl;
+	cin>>n;
+	T = new int [n];
+	
+	menu();
+	
+
+	
+	delete [] T;
+	return 0;
+}
