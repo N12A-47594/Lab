@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+int n;
+
+long int Rek(int n)
+{
+    if (n==1 || n==2)
+        return 1;
+    else
+        return Rek(n-1)+Rek(n-2);
+}
+ 
+long int It(int n)
+{
+    long tab[n];
+    tab[0]=0;
+    tab[1]=1;
+	
+	int i;
+ 
+    for (i=2;i<=n;i++)
+	{
+        tab[i]=tab[i-1]+tab[i-2];
+	}
+    return tab[n];
+}
+int main()
+{
+    
+    int x;
+    
+    cout << "Wprowadz wartosc n:"<<endl;
+    cin >> n;
+	
+    cout << "1.Rek"<<endl;
+    cout << "2.It"<<endl;
+    cin >> x;
+    switch (x)
+    {
+        case 1:
+        Rek(n);
+        cout<<Rek(n)<<endl;
+        break;
+        
+        case 2:
+        It(n);
+		cout<<It(n)<<endl;
+        break;
+        
+        default:
+        
+        break;
+    }
+    
+}
