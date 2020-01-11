@@ -16,9 +16,9 @@ void main()
 	// Sortowanie Babelkowe + Min & Max
 
 
-    if (a>b)
+    if (a<b)
 	{
-        if (b>c)
+        if (b<c)
         {
         	printf("%d,%d,%d\n", a,b,c);
         	Max = a;
@@ -26,7 +26,7 @@ void main()
         }
 		else
 		{
-			if (a>c)
+			if (a<c)
 			{
             	printf("%d,%d,%d\n", a,c,b );
             	Max = a;
@@ -42,9 +42,9 @@ void main()
 	}
     else
     {
-		if (b>c)
+		if (b<c)
 		{	
-            if (a>c)
+            if (a<c)
             {
             	printf("%d,%d,%d\n", b,a,c);
             	Max = b;
