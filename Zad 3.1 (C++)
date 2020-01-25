@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int *T;
 int n;
+int T[1];
 int Suma, Srednia;
 
  int generateArray(int n)		//Matka
@@ -16,26 +16,24 @@ int Suma, Srednia;
 		T[i] = rand()%100;
 	}
 	cout<<endl;
+	
  }
 
-int sortArray(int n)			//Pierworodna
+int sortArray(int T[], int n)			//Pierworodna
 {
-	for (int j=1; j<n; j++)
+	for (int j=0; j<n; j++)
 	{
-		for (int i=n; i>=1; i--)
+		for (int i=1; i<n; i++)
 		{
-			if (T[i]<T[i--])
+			if (T[i-1]>T[i])
 			{
-				int reka;
-				reka = T[i--];
-				T[i--] = T[i];
-				T[i] = reka;
+				swap(T[i-1], T[i]);
 			}
 		}
 	}
 }
 
-int averageValue(int n) 	//Malcolm
+int averageValue(int T[], int n) 	//Malcolm
 {
 	for (int i=0;i<n;i++)
 	{
@@ -46,17 +44,17 @@ int averageValue(int n) 	//Malcolm
 	cout<<"Srednia: "<<Srednia<<endl;
 }
 
-int maximumValue()					//Starsza Bliźniaczka
+int maximumValue(int T[], int n)					//Starsza Bliźniaczka
 {
-	cout<<"Najwieksza: "<<T[n]<<endl;
+	cout<<"Najwieksza: "<<T[n-1]<<endl;
 }
 
-int minimumValue() 					//Młodsza Bliźniaczka
+int minimumValue(int T[]) 					//Młodsza Bliźniaczka
 {
 	cout<<"Najmniejsza: "<<T[0]<<endl;
 }
 
-int printArray() 					//Bobo
+int printArray(int T[], int n) 					//Bobo
 {
 	cout<<"Tablica:"<<endl;
 	for(int i=0; i<n; i++)
@@ -72,15 +70,14 @@ int main()
 	
 	cout<<"Podaj rozmiar Tablicy"<<endl;
 	cin>>n;
-	T = new int [n];
 	
-	generateArray(n);
-	sortArray(n);
-	averageValue(n);
-	minimumValue();
-	maximumValue();
-	printArray();
+	T[n] = generateArray(n);
+	printArray(T,n);
+	T[n] = sortArray(T,n);
+	printArray(T,n);
+	averageValue(T,n);
+	minimumValue(T);
+	maximumValue(T,n);
 	
-	delete [] T;
 	return 0;
 }
