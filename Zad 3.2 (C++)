@@ -9,8 +9,7 @@ using namespace std;
 
 int n;
 int T[1];
-int Suma, Srednia;
-string Tab;
+string tab;
 
 int generateArray(int T[], int n);
 int sortArray(int T[], int n);
@@ -19,7 +18,7 @@ int maximumValue(int T[], int n);
 int minimumValue(int T[]);
 int printArray(int T[], int n);
 string saveArray(int T[], int n);
-string loadArray();
+string loadArray(int T[], int n);
 int menu();
 
 int main()
@@ -42,7 +41,7 @@ int menu()										//Ojciec
 		cout<<"3.Zapisz Tablice."<<endl;
 		cout<<"4.Sortuj Tablice."<<endl;
 		cout<<"5.Pokaz srednia wartosc."<<endl;
-		cout<<"6.Pokaz najmniejsza wartosc."<<endl;
+		cout<<"6.Pokaz najmniejsza wartosc.(UWAGA! POSEGREGUJE TO TABLICE)"<<endl;
 		cout<<"7.Pokaz najwieksza wartosc.(UWAGA! POSEGREGUJE TO TABLICE)"<<endl;
 		cout<<"8.Pokaz Tablice."<<endl;
 		cout<<"9.Wyjscie."<<endl;
@@ -55,10 +54,10 @@ int menu()										//Ojciec
 				T[n]= generateArray(T,n);
 				break;
 				case 2:
-				
+				loadArray(T,n);
 				break;
 				case 3:
-				Tab = saveArray(T,n);
+				saveArray(T,n);
 				break;
 				case 4:
 				T[n] = sortArray(T,n);
@@ -110,6 +109,7 @@ int sortArray(int T[], int n)					//Pierworodna
 
 int averageValue(int T[], int n) 				//Malcolm
 {
+	int Suma, Srednia;
 	for (int i=0;i<n;i++)
 	{
 		Suma += T[i];
@@ -136,6 +136,16 @@ int maximumValue(int T[], int n)				//Starsza Bliźniaczka
 
 int minimumValue(int T[]) 						//Młodsza Bliźniaczka
 {
+	for (int j=0; j<n; j++)
+	{
+		for (int i=1; i<n; i++)
+		{
+			if (T[i-1]>T[i])
+			{
+				swap(T[i-1], T[i]);
+			}
+		}
+	}
 	cout<<"Najmniejsza: "<<T[0]<<endl;
 }
 
@@ -149,31 +159,30 @@ int printArray(int T[], int n) 					//Bobo
 	cout<<endl;	
 }	
 
-string saveArray(int T[], int n)
+string saveArray(int T[], int n)				//Mlodszy
 {
-	for(int i=0; i<n; i++)
-	{
-		Tab += T[i];
-	}
-	fstream putin;
-    putin.open("save.txt", ios::out);
-    putin<<Tab;
-	putin.close();
-	cout<<"Zapisano:"<<endl;
-	cout<<Tab<<endl;      
+	fstream save;
+    save.open("save.txt", ios::out);
+    	for(int i=0; i<n; i++)
+		{
+			save<<T[i]<<" ";
+		}
+	save.close();
+	cout<<"Zapisano."<<endl;   
 }
 
-string loadArray()
+string loadArray(int T[], int n)				//Starszy
 {
-	fstream putout;
-	putout.open("save.txt", ios::in);
-	if (putout.good()==false)
+	fstream save;
+	save.open("save.txt", ios::in);
+	if (save.good()==false)
 	{
 		cout<<"Nie znaleziono pliku zapisu.";
 	}
 	else
 	{
-		getline(putout, Tab);
+		getline(save, tab);
+		cout<<tab;
 	}
-	putout.close();
+	save.close();
 }
