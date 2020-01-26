@@ -2,69 +2,90 @@
 #include <cstdlib>
 #include <time.h>
 #include <fstream>
+#include <string>
+
 
 using namespace std;
 
-int *T;
-int m;
 int n;
+int T[1];
 int Suma, Srednia;
-fstream Tablica;
+string Tab;
 
-int menu(int m, int n)				//Ojciec
+int generateArray(int T[], int n);
+int sortArray(int T[], int n);
+int averageValue(int T[], int n);
+int maximumValue(int T[], int n);
+int minimumValue(int T[]);
+int printArray(int T[], int n);
+string saveArray(int T[], int n);
+string loadArray();
+int menu();
+
+int main()
 {
-	switch(m)
+
+	menu();
+	
+}
+
+int menu()										//Ojciec	
+{
+	int s;
+	s = 0;
+	while (s!=9)
 	{
-		cout<<"Co chcialbys zrobic z tablica?"<<endl;
-		cout<<"1. Wypelnic losowymi zmiennymi."<<endl;
-		cout<<"2. Posortowac."<<endl;
-		cout<<"3. Policzyc srednia wartosc zmiennych."<<endl;
-		cout<<"4. Podejrzec najnizsza wartosc."<<endl;
-		cout<<"5. Podejrzec najwyzsza wartosc."<<endl;
-		cout<<"6. Obejrzec Tablice."<<endl;
-		cout<<"7. Zapisac Tablice."<<endl;
-		cout<<"8. Wczytac Tablice."<<endl;
-		case 1:
-			generateArray(n);
-		case 2:
-			sortArray(n);
-		case 3:
-			averageValue(n);
-		case 4:
-			minimumValue();
-		case 5:
-			maximumValue();
-		case 6:
-			printArray();
-		case 7:
-			saveArray(*T);
-		case 8:
-			loadArray(*T);
-		default:
-			cout<<"Nie kombinuj."<<endl;
+		cout<<endl;
+		cout<<"MAIN MENU:"<<endl;
+		cout<<"1.Nowa Tablica."<<endl;
+		cout<<"2.Wczytaj Tablice."<<endl;
+		cout<<"3.Zapisz Tablice."<<endl;
+		cout<<"4.Sortuj Tablice."<<endl;
+		cout<<"5.Pokaz srednia wartosc."<<endl;
+		cout<<"6.Pokaz najmniejsza wartosc."<<endl;
+		cout<<"7.Pokaz najwieksza wartosc.(UWAGA! POSEGREGUJE TO TABLICE)"<<endl;
+		cout<<"8.Pokaz Tablice."<<endl;
+		cout<<"9.Wyjscie."<<endl;
+		cin>>s;
+		switch (s)
+			{
+				case 1:
+				cout<<"Podaj rozmiar Tablicy"<<endl;
+				cin>>n;
+				T[n]= generateArray(T,n);
+				break;
+				case 2:
+				
+				break;
+				case 3:
+				Tab = saveArray(T,n);
+				break;
+				case 4:
+				T[n] = sortArray(T,n);
+				break;
+				case 5:
+				averageValue(T,n);
+				break;
+				case 6:
+				minimumValue(T);
+				break;
+				case 7:
+				maximumValue(T,n);
+				break;
+				case 8:
+				printArray(T,n);
+				break;
+				case 9:
+				break;
+				default:
+				cout<<"Wybrano nieistniejaca opcje."<<endl;
+				break;
+			}
 	}
 }
 
-int saveArray(*T)				//Pierworodny
-{
-	Tablica.open("Tablica.txt", ios::out);
-	Tablica<<*T<<endl;
-	Tablica.close();
-}
-
-int  loadArray(*T)
-{
-	Tablica.open("Tablica.txt", ios::in);
-	if(Tablica.good()==false)
-	{
-		cout<<"Cos zgubilismy."<<endl;
-	}
-	string nitka;
-	getline(Tablica,nitka);
-}
-
-int generateArray(int n)		//Matka
- {
+int generateArray(int T[],int n)				//Matka
+{	
 	srand(time(NULL));
 	for(int i=0; i<n; i++)
 	{
@@ -73,24 +94,21 @@ int generateArray(int n)		//Matka
 	cout<<endl;
  }
 
-int sortArray(int n)			//Pierworodna
+int sortArray(int T[], int n)					//Pierworodna
 {
-	for (int j=1; j<n; j++)
+	for (int j=0; j<n; j++)
 	{
-		for (int i=n; i>=1; i--)
+		for (int i=1; i<n; i++)
 		{
-			if (T[i]<T[i--])
+			if (T[i-1]>T[i])
 			{
-				int reka;
-				reka = T[i--];
-				T[i--] = T[i];
-				T[i] = reka;
+				swap(T[i-1], T[i]);
 			}
 		}
 	}
 }
 
-int averageValue(int n) 			//Malcolm
+int averageValue(int T[], int n) 				//Malcolm
 {
 	for (int i=0;i<n;i++)
 	{
@@ -101,43 +119,27 @@ int averageValue(int n) 			//Malcolm
 	cout<<"Srednia: "<<Srednia<<endl;
 }
 
-int maximumValue()					//Starsza Bliźniaczka
+int maximumValue(int T[], int n)				//Starsza Bliźniaczka
 {
-	for (int j=1; j<n; j++)
+	for (int j=0; j<n; j++)
 	{
-		for (int i=n; i>=1; i--)
+		for (int i=1; i<n; i++)
 		{
-			if (T[i]<T[i--])
+			if (T[i-1]>T[i])
 			{
-				int reka;
-				reka = T[i--];
-				T[i--] = T[i];
-				T[i] = reka;
+				swap(T[i-1], T[i]);
 			}
 		}
 	}
-	cout<<"Najwieksza: "<<T[n]<<endl;
+	cout<<"Najwieksza: "<<T[n-1]<<endl;
 }
 
-int minimumValue() 					//Młodsza Bliźniaczka
+int minimumValue(int T[]) 						//Młodsza Bliźniaczka
 {
-	for (int j=1; j<n; j++)
-	{
-		for (int i=n; i>=1; i--)
-		{
-			if (T[i]<T[i--])
-			{
-				int reka;
-				reka = T[i--];
-				T[i--] = T[i];
-				T[i] = reka;
-			}
-		}
-	}
 	cout<<"Najmniejsza: "<<T[0]<<endl;
 }
 
-int printArray() 					//Bobo
+int printArray(int T[], int n) 					//Bobo
 {
 	cout<<"Tablica:"<<endl;
 	for(int i=0; i<n; i++)
@@ -147,18 +149,31 @@ int printArray() 					//Bobo
 	cout<<endl;	
 }	
 
-int main()
+string saveArray(int T[], int n)
 {
-	
-	cout<<"Stworzmy Tablice!"<<endl;
-	cout<<"Podaj rozmiar Tablicy:"<<endl;
-	cin>>n;
-	T = new int [n];
-	
-	menu();
-	
+	for(int i=0; i<n; i++)
+	{
+		Tab += T[i];
+	}
+	fstream putin;
+    putin.open("save.txt", ios::out);
+    putin<<Tab;
+	putin.close();
+	cout<<"Zapisano:"<<endl;
+	cout<<Tab<<endl;      
+}
 
-	
-	delete [] T;
-	return 0;
+string loadArray()
+{
+	fstream putout;
+	putout.open("save.txt", ios::in);
+	if (putout.good()==false)
+	{
+		cout<<"Nie znaleziono pliku zapisu.";
+	}
+	else
+	{
+		getline(putout, Tab);
+	}
+	putout.close();
 }
